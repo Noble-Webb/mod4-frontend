@@ -1,7 +1,7 @@
 import React from 'react'
-import './App.css'
+// import './App.css'
 import { connect } from 'react-redux';
-import { addNote } from '../actions/quotes';
+import { addNote } from '../actions/notes';
 import { Form, Button } from 'semantic-ui-react'
 
 class NoteInput extends React.Component {

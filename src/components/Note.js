@@ -6,6 +6,7 @@ const Note = ({ note, removeNote, upvoteNote, downvoteQuote }) =>
       <div className="card-block">
         <blockquote className="card-blockquote">
           <p>{note.title}</p>
+          <img src={note.image_url} className="image"  alt="a picture says a thousand words, but i really coulnd't tell you what they were."/>
           <footer>- content <cite title="Source Title">{note.content}</cite></footer>
         </blockquote> 
       </div>
