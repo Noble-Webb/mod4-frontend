@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Note = ({ note, removeNote, upvoteNote, downvoteQuote }) => 
+const Note = ({ note, removeNote, upvoteNote, downvoteQuote }) =>  
   <div>
     <div className="card card-inverse card-success card-primary mb-3 text-center">
       <div className="card-block">
         <blockquote className="card-blockquote">
           <p>{note.title}</p>
           <img src={note.image_url} className="image"  alt="a picture says a thousand words, but i really coulnd't tell you what they were."/>
-          <footer>- content <cite title="Source Title">{note.content}</cite></footer>
+          <p>{note.content}</p>
         </blockquote> 
       </div>
       <div className="float-right"> 

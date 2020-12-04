@@ -5,7 +5,7 @@ class User extends React.Component {
 
   handleDeleteUser = () => {
     const { id } = this.props
-    fetch(`http://localhost:3000/users/${id}`, { method: 'DELETE' })
+    fetch(`http://localhost:3001/users/${id}`, { method: 'DELETE' })
     .then(resp => resp.json())
     .then(data => {
       this.props.handleDelete(id)

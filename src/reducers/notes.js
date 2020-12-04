@@ -1,8 +1,10 @@
 export default function notes(state = [], action) {
     let update;
     switch (action.type){
+      case 'FETCH_NOTES_WORKS':
+        return action.notes 
       case "ADD_NOTE":
-        return [...state, action.note];
+        return [...state, action.notes];
       case "REMOVE_NOTE":
         update = state.findIndex(note => note.update === action.update)
         return [...state.slice(0, update), ...state.slice(update +1) ];

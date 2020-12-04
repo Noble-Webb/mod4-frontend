@@ -30,6 +30,6 @@ const mapStateToProps = state => {
   return ({
     notes: state.notes
   })
-}
+} 
 
 export default connect(mapStateToProps, { removeNote, upvoteNote, downvoteNote })(NoteList);

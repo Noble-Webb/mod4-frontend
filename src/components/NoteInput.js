@@ -37,7 +37,7 @@ class NoteInput extends React.Component {
     }
 
 
-    fetch('http://localhost:3000/notes', reqObj)
+    fetch('http://localhost:3001/notes', reqObj)
     .then(resp => resp.json())
     .then(note => {
       this.setState({

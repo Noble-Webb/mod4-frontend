@@ -1,36 +1,24 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
 import NoteList from "./NoteList";
 import NoteInput from "./NoteInput";
 
-class Notes extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { 
-            notes: []
-        };
-    }
+const Notes = (props) => {
 
-    componentDidMount(){
-        fetch('http://localhost:3000/notes')
-        .then(resp => resp.json())
-        .then(data => {
-            this.setState({
-                notes: data
-            })
-        })
-    }
-
-    render() { 
-        return ( 
-            <Switch>
-            <Route component={NoteInput} path='/notes/new' />
-            <Route render={() => {
-              return <NoteList notes={this.state.notes} />
-            }} path='/notes' />
-          </Switch> 
-         );
-    }
+    return ( 
+        <Switch>
+        <Route component={NoteInput} path='/notes/new' />
+        <Route render={() => {
+            return <NoteList notes={props.notes} />
+        }} path='/notes' />
+        </Switch> 
+    );
 }
+    const mapStateToProps = (state) =>{
+        return{
+            notes: state.notes
+        }
+    }
  
-export default Notes;
+export default connect(mapStateToProps)(Notes);

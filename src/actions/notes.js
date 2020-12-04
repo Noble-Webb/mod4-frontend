@@ -1,3 +1,9 @@
+export const fetchNotesWorks = (notes) => {
+  return {
+    type: 'FETCH_NOTES_WORKS',
+    notes 
+  };
+};
 export const addNote = note => {
     return {
       type: 'ADD_NOTE',
