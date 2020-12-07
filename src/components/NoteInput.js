@@ -1,5 +1,4 @@
 import React from 'react'
-// import './App.css'
 import { connect } from 'react-redux';
 import { addNote } from '../actions/notes';
 import { Form, Button } from 'semantic-ui-react'
@@ -27,7 +26,6 @@ class NoteInput extends React.Component {
       image_url: this.state.image_url
     }
 
-
     const reqObj = {
       method: 'POST',
       headers: {
@@ -35,7 +33,6 @@ class NoteInput extends React.Component {
       },
       body:  JSON.stringify(newNote)
     }
-
 
     fetch('http://localhost:3001/notes', reqObj)
     .then(resp => resp.json())
@@ -45,7 +42,6 @@ class NoteInput extends React.Component {
         content: '',
         image_url: ''
       })
-
       this.props.addNote(note)
     })
   }
@@ -92,4 +88,4 @@ class NoteInput extends React.Component {
  }
 }
 
-export default NoteInput
+export default connect(null, {addNote})(NoteInput);

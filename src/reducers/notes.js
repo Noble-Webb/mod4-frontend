@@ -21,6 +21,20 @@ export default function notes(state = [], action) {
         })
   
         return update
+        
+      case "DOWNVOTE_NOTE":
+        update = state.map(n => {
+          if(n.id === action.noteId){
+            return {
+              ...n,
+              votes: n.votes -= 1
+            }
+          }else{
+            return n 
+          }
+        })
+  
+        return update
 
       default:
         return state;

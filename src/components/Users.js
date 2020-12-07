@@ -1,8 +1,6 @@
 import React from 'react'
 import { Switch, Route } from "react-router-dom";
 import UserList from './UserList'
-import UserInput from './UserInput'
-import EditUserForm from './EditUserForm'
 
 class Users extends React.Component {
   constructor(){
@@ -26,9 +24,8 @@ class Users extends React.Component {
   render() { 
     return ( 
         <Switch>
-        <Route component={UserInput} path='/users/new' />
         <Route render={() => {
-          return <UserList notes={this.state.users} />
+          return <UserList notes={this.state.users}/>
         }} path='/users' />
       </Switch> 
      );
