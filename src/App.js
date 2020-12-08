@@ -24,7 +24,7 @@ class App extends Component {
 
 
     if(!token) {
-      this.props.history.push('/signup')
+      this.props.history.push('/login')
     } else {
 
       const reqObj = {

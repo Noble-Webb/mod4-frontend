@@ -1,4 +1,3 @@
-import { Switch, Route } from "react-router-dom";
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import NoteList from "./NoteList";
