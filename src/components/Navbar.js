@@ -7,7 +7,8 @@ import { NavLink} from 'react-router-dom'
 class Navbar extends React.Component {
 
   handleLogout = () => {
-    localStorage.removeItem('my_app_token')
+    localStorage.clear()
+    // debugger
     this.props.logoutUser()
   }
 
@@ -21,7 +22,7 @@ class Navbar extends React.Component {
         </NavLink>
         <div className="right menu">
         {
-        this.props.auth ?
+        localStorage.getItem("my_app_token") ?
         <NavLink to='/login' className="ui button" onClick={this.handleLogout}>
           Logout
         </NavLink>
@@ -33,8 +34,8 @@ class Navbar extends React.Component {
           <NavLink className="item" to='/notes/new'>
             Add Note 
           </NavLink>
-          <NavLink className="item" to='/about'>
-            About Page
+          <NavLink className="item" to='/notes'>
+            Notes Page
           </NavLink>
         </div>
       </div>

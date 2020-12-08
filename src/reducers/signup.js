@@ -2,7 +2,7 @@ const initialState = {
 	user: {
 		username: '',
 		password: '',
-		// profile_pic: '',
+		profile_pic: '',
 	}
 };
 const signup = (state = initialState, action) => {
@@ -12,7 +12,7 @@ const signup = (state = initialState, action) => {
 			user: {
 				username: action.username,
 				password: action.password,
-				// profile_pic: action.picture,
+				profile_pic: action.picture,
 			},
 		};
 		default: return state;

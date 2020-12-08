@@ -8,7 +8,7 @@ class Signup extends Component {
 		this.state = {
 			username: '',
 			password: '',
-			// profile_pic: '',
+			profile_pic: '',
 		};
 	}
 
@@ -19,9 +19,33 @@ class Signup extends Component {
         });
     }
 
+    handleAvatarChange = (e) => {
+      this.setState({
+        profile_pic: e.target.files[0],
+      });
+    }
+
+    // handleImageUpload = (imageFile) => {
+    //   const formData = new FormData();
+    //   formData.append('file', imageFile);
+    //   formData.append('upload_preset', 'avatar');
+    //   const response = axios({
+    //     url: 'your cloudinary api url',
+    //     method: 'POST',
+    //     data: formData,
+    //   });
+    //   return response.data.secure_url;
+    // }
+
     handleSubmit = (e) => {
       e.preventDefault();
-  
+      
+      // let {profile_pic} = this.props
+      
+      // const imgPath =  this.handleImageUpload(profile_pic)
+      
+      // profile_pic = imgPath
+
       const reqObj = {
         method: 'POST',
         headers: {
@@ -61,7 +85,8 @@ render() {
                 placeholder="Username"
                 required
             />
-            
+            <br/>
+
             <input
                 onChange={this.handleChange}
                 type="password"
@@ -69,9 +94,10 @@ render() {
                 placeholder="Password"
                 required
             />
+            <br/>
 			
             <input
-                onChange={this.handleChange}
+                onChange={this.handleAvatarChange}
                 type="file"
                 accept="/images/*"
             />      

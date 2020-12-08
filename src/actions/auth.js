@@ -3,10 +3,11 @@ export const loginSuccess = ({user, notes}) => {
         type: 'LOGIN_SUCCESS',
         user,
         notes 
-    }
+    } 
 }
 
 export const currentUser = ({ user, notes}) => {
+    // debugger
     return {
         type: 'CURRENT_USER',
         user,

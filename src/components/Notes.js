@@ -1,20 +1,19 @@
 import { Switch, Route } from "react-router-dom";
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 import NoteList from "./NoteList";
-import NoteInput from "./NoteInput";
 
 
-const Notes = (props) => {
+class Notes extends Component {
+    
 
+    render(){
     return ( 
-        <Switch>
-            <Route exact path='/notes/create' render={() => <NoteInput />} />
-             <Route render={() => {
-                return props.notes.map(note =>{
-                    return <NoteList key={note.id} {...note} />  })
-                }} path='/notes' />
-        </Switch> 
+       <div>
+           <NoteList />
+       </div>
     );
+    }
 }
     const mapStateToProps = (state) =>{
         return{

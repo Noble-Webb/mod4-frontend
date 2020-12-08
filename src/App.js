@@ -15,7 +15,6 @@ import NoteInput from "./components/NoteInput";
 class App extends Component {
   componentDidMount(){
     const token = localStorage.getItem('my_app_token')
-    
     fetch('http://localhost:3001/notes')
       .then(resp => resp.json())
       .then(notes => {
@@ -23,8 +22,9 @@ class App extends Component {
         this.props.fetchNotesWorks(notes)
       })
 
+
     if(!token) {
-      this.props.history.push('/login')
+      this.props.history.push('/signup')
     } else {
 
       const reqObj = {
@@ -36,19 +36,20 @@ class App extends Component {
 
       fetch('http://localhost:3001/current_user', reqObj)
       .then(resp => resp.json())
-      .then(data =>{
-        console.log(data)
-        this.props.currentUser(data)
+      .then(users =>{
+        // console.log(users)
+        this.props.currentUser(users)
       })
     }
   }
 
   render(){
+    console.log(this.state)
     return (
       <div className="App">
-        <Navbar icon="paint brush" title="FlatAttack!!" description="out app" />
+        <Navbar icon="puzzle" title="Quality Content!!" description="Broken Bones Made Stronger" />
         <Switch>
-          <Route path="/notes" component={Notes} />
+          <Route exact path="/notes" component={Notes} />
           <Route path='/notes/new' component={NoteInput} />
           <Route path="/users" component={User} />
           <Route path="/login" component={Login} />
@@ -64,4 +65,8 @@ const mapDispatchToProps = {
   currentUser
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(App));
+const mapStateToProps = (state) =>{
+  // user: state.current_user.user.id  
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

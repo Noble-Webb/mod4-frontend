@@ -1,15 +1,18 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import { addNote } from '../actions/notes';
-import { Form, Button } from 'semantic-ui-react'
+import { currentUser } from "../actions/auth";
+import { Form } from 'semantic-ui-react'
 
 class NoteInput extends React.Component {
-  state = {
-    title: '',
-    content: '',
-    image_url: '',
+  constructor(props){
+    super(props)
+    this.state = {
+      title: '',
+      content: '',
+      image_url: ''
+    }
   }
-
   handleChange = (e) => {
     const { value, name } = e.target;
     this.setState({
@@ -21,9 +24,12 @@ class NoteInput extends React.Component {
     e.preventDefault();
 
     const newNote = {
+      author: this.props.users.username,
       title: this.state.title,
       content: this.state.content,
-      image_url: this.state.image_url
+      image_url: this.state.image_url,
+      votes: 0,
+      user_id: this.props.users.id 
     }
 
     const reqObj = {
@@ -40,18 +46,20 @@ class NoteInput extends React.Component {
       this.setState({
         title: '',
         content: '',
-        image_url: ''
+        image_url: '',
+         
       })
       this.props.addNote(note)
+      this.props.history.push('/notes')
     })
   }
 
  render(){
    const { title, content, image_url } = this.state
-
+  // console.log(this.props.users.id)
    return (
-    <Form className={'new-note-form'} inverted onSubmit={this.handleSubmit}>
-    <Form.Group widths='equal'>
+    <form className={'new-note-form'} inverted onSubmit={this.handleSubmit}>
+    <form widths='equal'>
       <Form.Input
         fluid
         name='title'
@@ -61,8 +69,8 @@ class NoteInput extends React.Component {
         label='Note Title'
         placeholder='Note Title'
       />
-    </Form.Group>
-    <Form.Group widths='equal'>
+    </form>
+    <form widths='equal'>
       <Form.Input
         fluid
         name='content'
@@ -81,11 +89,15 @@ class NoteInput extends React.Component {
         label='image_url'
         placeholder='image_url'
       />
-    </Form.Group>
-    <Button type='submit'>Submit</Button>
-  </Form>
+    </form>
+    <button type='submit'>Submit</button>
+  </form>
    )
  }
 }
+const mapStateToProps = (state) => {
 
-export default connect(null, {addNote})(NoteInput);
+  return {users: state.users}
+}
+
+export default connect(mapStateToProps, {addNote, currentUser})(NoteInput);

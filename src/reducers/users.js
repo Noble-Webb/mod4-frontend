@@ -3,7 +3,8 @@ export default function users(state = [], action) {
     switch (action.type) {
       case "ADD_USER":
         return [...state, action.user];
-  
+      case 'CURRENT_USER':  
+        return  action.user
       case "REMOVE_USER":
         idx = state.findIndex(user => user.id  === action.id)
         return [...state.slice(0, idx), ...state.slice(idx + 1)];
@@ -22,4 +23,4 @@ export default function users(state = [], action) {
       default:
         return state;
     }
-  }
+  } 

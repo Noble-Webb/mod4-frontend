@@ -1,9 +1,10 @@
+import users from "./users";
+
 const auth = (state=null, action ) => {  
   switch(action.type){
       case 'LOGIN_SUCCESS':
-        return action.user 
-      case 'CURRENT_USER':
-        return action.user
+        case 'CURRENT_USER':  
+          return [...state, action.user] 
       case 'LOGOUT_USER':
         return null
       default: 
@@ -11,4 +12,4 @@ const auth = (state=null, action ) => {
     }
 }
 
-export default auth;
+export default auth; 

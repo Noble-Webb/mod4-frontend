@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  background-image: url("https://images.unsplash.com/photo-1583156340160-7867f31285d5?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80")
   
 }
 
@@ -13,7 +14,11 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
+@media (prefers-reduced-motion: no-preference) {
+  .cardx {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -28,6 +33,27 @@
 .App-link {
   color: #61dafb;
 }
+
+.card {
+  background-color: #e9ecef;
+  height: 350px;
+  width: 400px;
+  box-shadow: 5px 5px grey;
+  padding: 10px;
+  border-radius: 0px;
+  overflow: hidden
+  
+}
+
+.note-image {
+  max-width: 125px;
+  max-height: 5px;
+  margin-left: auto;
+  margin-right: auto 
+}
+
+
+
 
 @keyframes App-logo-spin {
   from {

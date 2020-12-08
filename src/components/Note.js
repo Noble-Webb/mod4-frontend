@@ -1,85 +1,66 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import  { removeNote, upvoteNote, downvoteNote } from '../actions/notes'
-import notes from '../reducers/notes';
 
 class Note extends React.Component{
-  constructor(props){
-    super(props);
-    this.state = {
-      title: props.note.title,
-      content: props.note.content,
-      image_url: props.note.image_url,
-      votes: props.note.votes
-    }
-  }
-
+ 
   handleDelete = (e) => {
-    const target = e.target.id 
+    const target = this.props.note.id 
 
     fetch(`http://localhost:3001/notes/${target}`, {method: 'DELETE'})
     .then(resp => resp.json())
     .then(data => {
-      this.props.removeNote(target)
+      this.props.removeNote(data.id)
     })
   }
   
   handleUpVotes = (e) => { 
-    const target = e.target.id 
+    const target = this.props.note.id  
     
-    this.setState(prevState => {
-        return {...prevState,
-        votes: prevState.votes += 1}
-    })
-
     const reqObj = {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body:  JSON.stringify({...this.state})
+      body:  JSON.stringify(this.props.note)
     }
 
     fetch(`http://localhost:3001/notes/${target}`, reqObj)
     .then(resp => resp.json())
     .then(updatedNote => {
-      this.props.upvoteNote(updatedNote)
+      this.props.upvoteNote(updatedNote.id)
     })
   }
 
   handleDownVotes = (e) => { 
-    const target = e.target.id 
-    
-    this.setState(prevState => {
-        return {...prevState,
-        votes: prevState.votes -= 1}
-    })
+    const target = this.props.note.id  
 
     const reqObj = {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'
       },
-      body:  JSON.stringify({...this.state})
+      body:  JSON.stringify(this.props.note)
     }
 
     fetch(`http://localhost:3001/notes/${target}`, reqObj)
     .then(resp => resp.json())
     .then(updatedNote => {
-      this.props.downvoteNote(updatedNote)
+      this.props.downvoteNote(updatedNote.id)
     })
   }
   
   render(){
-    const cardStyle = { border: '1px solid white',  padding: '2%', width: '400px', height: '150px'}
+
     const {title, content, image_url, id, votes} = this.props.note
     return(
-        <div className="card-block">
-          <div className="card-block">
+        <div className="card" >
               <p>{title}</p>
               <img src={image_url} className="image"  alt="a picture says a thousand words, but i really coulnd't tell you what they were."/>
               <p>{content}</p>
-          </div>
+              <form>
+                  <textarea placeholder="Got Some Quality Content?"/>
+                </form>
           <div className="float-right"> 
             <div className="btn-group btn-group-sm" role="group" aria-label="Basic example">
               <button 
@@ -117,4 +98,6 @@ class Note extends React.Component{
     )
   }
 }
+
+
 export default connect(null, { removeNote, upvoteNote, downvoteNote })(Note);

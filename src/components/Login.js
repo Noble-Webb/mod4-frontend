@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { loginSuccess } from '../actions/auth'
+import { currentUser } from '../actions/auth'
 
 
 class Login extends React.Component {
@@ -35,9 +35,10 @@ class Login extends React.Component {
           error: data.error
         })
       } else {
-        this.props.loginSuccess(data)
+        this.props.currentUser(data)
         this.props.history.push('/notes')
         localStorage.setItem('my_app_token', data.token)
+        
       }
     })
   }
@@ -49,18 +50,19 @@ class Login extends React.Component {
         {this.state.error ? <h4 style={{color: 'red'}}>{this.state.error}</h4> : null}
         <h3>Sign in</h3>
         <form onSubmit={this.handleSubmit}>
-          <input name={'username'} onChange={this.handleInputChange} value={this.state.username} />
-          <input name={'password'} onChange={this.handleInputChange} type="password" value={this.state.password} />
+          <input name={'username'} placeholder='Username' onChange={this.handleInputChange} value={this.state.username} />
+          <input name={'password'} onChange={this.handleInputChange} placeholder='Password' type="password" value={this.state.password} />
           <input type='submit' value='login' />
         </form>
-        <button> "Sign-up!?!?!" </button>
+        <message> <a href='/signup'>"Sign-up!?!?!"</a> </message>
       </body>
     );
   }
 }
 
 const mapDispatchToProps = {
-  loginSuccess: loginSuccess
+  // loginSuccess
+  currentUser
 }
 
 export default connect(null, mapDispatchToProps)(Login)
